@@ -13,7 +13,7 @@ const Pokemon = () => {
   console.log("Displaying pokeomn ", params);
   const fetchMyAPI = async () => {
     let response = await axios
-      .get(`http://localhost:3000/pokemon/${params.id}`)
+      .get(`https://pokefight-backend.onrender.com/pokemon/${params.id}`)
       .then((r) => {
         setIsLoading(false);
         console.log("single pokemons as returned from backend ", r.data);

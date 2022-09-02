@@ -11,7 +11,7 @@ const Home = () => {
 
   const fetchMyAPI = async () => {
     let response = await axios
-      .get("http://localhost:3000/pokemon/")
+      .get("https://pokefight-backend.onrender.com/pokemon/")
       .then((r) => {
         setIsLoading(false);
         setPokeList(r);
