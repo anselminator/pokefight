@@ -44,33 +44,63 @@ const Fight = () => {
       setFightState({
         ownPid: ourPokemon,
         advPid: newPokemon,
-        ownPLife: ourPokemon.base.hp,
-        advPLife: newPokemon.base.hp,
+        ownPLife: ourPokemon.base.HP,
+        advPLife: newPokemon.base.HP,
         isMyTurn: true,
       });
     }
   }
 
-  //   function attack() {
-  //     if () {
-  //       setFightState({
-  //         ownPid: fightState.ownPid,
-  //         advPid: fightState.advPid,
-  //         ownPLife: fightState.ownPLife,
-  //         advPLife: fightState.advPLife - fightState.ownPid.attack,
-  //         isMyTurn: false,
-  //       });
-  //     } else {
-  //       setFightState({
-  //         ownPid: fightState.ownPid,
-  //         advPid: fightState.advPid,
-  //         ownPLife: fightState.ownPLife - fightState.advPid.attack,
-  //         advPLife: fightState.advPLife,
-  //         isMyTurn: true,
-  //       });
-  //     }
-  //   }
+  function attack() {
+    const die1 = Math.floor(10 * Math.random()) + 1;
+    const die2 = Math.floor(10 * Math.random()) + 1;
+    console.log("fight ", die1);
 
+    // if((fightState.advPLife - fightState.ownPid.base.Attack) <= 0){
+    //   //gewonnen
+    // }else{
+    //   const result = fightState.advPLife - fightState.ownPid.base.Attack;
+    //   setFightState((p) => ({
+    //     ...p,
+    //     ownPLife: result,
+    //     advPLife: result,
+    //   }));
+    // }
+
+    const result = fightState.advPLife - fightState.ownPid.base.Attack / die1;
+    const result2 = fightState.ownPLife - fightState.advPid.base.Attack / die2;
+    console.log(result, result2);
+
+    setFightState((p) => ({
+      ...p,
+      ownPLife: result2,
+      advPLife: result,
+    }));
+
+    //    const result = fightState.advPid.base.HP - fightState.ownPid.base.Attack;
+  }
+
+  if (fightState.ownPLife <= 0) {
+    // our pokemon died
+    return (
+      <div>
+        <img src={fightState?.advPid?.pictureFront} alt="" />
+        <NavLink to="/">
+          <h4>has WON</h4>
+        </NavLink>
+      </div>
+    );
+  } else if (fightState.advPLife <= 0) {
+    // enemy died
+    return (
+      <div>
+        <img src={fightState?.ownPid?.pictureFront} alt="" />
+        <NavLink to="/">
+          <h4>has WON</h4>
+        </NavLink>
+      </div>
+    );
+  }
   return (
     <div>
       {/* Our Pokemon */}
@@ -78,8 +108,9 @@ const Fight = () => {
         <img src={fightState?.ownPid?.pictureBack} alt="" />
         <h4>{fightState?.ownPid?.name?.english}</h4>
         <p>Attack: {fightState?.ownPid?.base?.Attack}</p>
-        <p>Defense: {fightState?.ownPid?.base?.hp}</p>
-        <Button onClick={attack()}> </Button>
+        <p>Defense: {fightState?.ownPid?.base?.Defense}</p>
+        <h4>HP: {fightState?.ownPLife}</h4>
+        <Button onClick={attack}>Attack </Button>
       </div>
 
       {/* Enemy Pokemon  */}
@@ -87,7 +118,8 @@ const Fight = () => {
         <img src={fightState?.advPid?.pictureFront} alt="" />
         <h4>{fightState?.advPid?.name?.english}</h4>
         <p>Attack: {fightState?.advPid?.base?.Attack}</p>
-        <p>Defense: {fightState?.advPid?.base?.hp}</p>
+        <p>Defense: {fightState?.advPid?.base?.Defense}</p>
+        <h4>HP: {fightState?.advPLife}</h4>
       </div>
     </div>
   );
