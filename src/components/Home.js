@@ -34,9 +34,7 @@ const Home = () => {
   } else {
     return (
       <div>
-        <Button>Heres a button</Button>
         <h1>Here's our Pokemon list</h1>
-        <Button>And Heres another</Button>
         {pokeList?.data?.map((e, i) => (
           <NavLink to={`/pokemon/${e.id}`} key={i}>
             <Button variant="outlined" key={i}>

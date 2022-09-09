@@ -46,7 +46,9 @@ const Pokemon = () => {
         &nbsp;Type: {pokemon.type[0]} &nbsp; HP: {pokemon.base.HP}
         &nbsp; Attach: {pokemon.base.Attack}
         &nbsp;Defense: {pokemon.base.Defense}
-        <Button variant="outlined"> I choose you....</Button>
+        <NavLink to={`/fightWith/${pokemon.id}`}>
+          <Button variant="outlined">I choose you...</Button>
+        </NavLink>
       </div>
     );
   }
